@@ -43,7 +43,7 @@ having Count>1;
 
 ##Case Study 2 (Investigating metric spike)
 
--- A)User Engagement
+-- 1)User Engagement
 SELECT week(occurred_at) as Week,
 count(DISTINCT user_id)as Weekly_User_engagement
 FROM events
@@ -51,7 +51,7 @@ GROUP BY week(occurred_at)
 ORDER BY week(occurred_at);
 
 
-
+#2
 SET @g := 0;
 SELECT a.no_of_users, a.date,
 ( @g := @g + a.no_of_users ) as user_growth
@@ -62,7 +62,7 @@ FROM users WHERE state = "active"
 GROUP BY date(created_at) ) a;
 
 
-
+#3
 SELECT first AS "Week Numbers" ,
 SUM(CASE WHEN week_number = 0 THEN 1 ELSE 0 END) AS "Week 0",
 SUM(CASE WHEN week_number = 1 THEN 1 ELSE 0 END) AS "Week 1",
@@ -97,14 +97,14 @@ order by first;
 
 
 
-
+#4
 SELECT week(occurred_at) as Weeks,
 device, count(distinct user_id)as User_engagement
 FROM events
 GROUP BY device,week(occurred_at)
 ORDER BY week(occurred_at);
 
-
+#5
 SELECT week(occurred_at) as Week,
 count( DISTINCT ( CASE WHEN action = "sent_weekly_digest" THEN user_id end )) as weekly_digest,
 count( distinct ( CASE WHEN action = "sent_reengagement_email" THEN user_id end )) as reengagement_mail,
